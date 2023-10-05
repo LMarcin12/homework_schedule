@@ -1,43 +1,48 @@
 <template>
-  <KeepAlive>
-    <q-page class="bg-grey-3 column">
-      <q-list class="bg-white" separator bordered>
-        <q-item
-          v-for="(task, index) in tasks"
-          :key="task.title"
-          clickable
-          @click="task.done = !task.done"
-          :class="{ done: task.done }"
-          v-ripple
-        >
-          <q-item-section avatar>
-            <q-checkbox v-model="task.done" color="primary" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ task.title }}</q-item-label>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label class="text-right">{{ task.dueDate }}</q-item-label>
-          </q-item-section>
-          <q-item-section v-if="task.done" side>
-            <q-btn
-              @click.stop="deleteTask(index)"
-              push
-              color="primary"
-              icon="delete"
-              dense
-            />
-          </q-item-section>
-        </q-item>
-      </q-list>
-      <div class="no-tasks" v-if="!tasks.length">
-        <center>
-          <q-icon name="check" size="100px" color="primary" />
-          <div class="text-h5 text-primary">No Tasks Remaining</div>
-        </center>
-      </div>
-    </q-page>
-  </KeepAlive>
+  <q-page class="bg-grey-3 column">
+    <div class = "row q-pa-sm bg-primary">
+      <q-input v-model="text" :dense="dense">
+        <template v-slot:prepend>
+          <q-icon name="event" />
+        </template>
+      </q-input>
+    </div>
+    <q-list class="bg-white" separator bordered>
+      <q-item
+        v-for="(task, index) in tasks"
+        :key="task.title"
+        clickable
+        @click="task.done = !task.done"
+        :class="{ done: task.done }"
+        v-ripple
+      >
+        <q-item-section avatar>
+          <q-checkbox v-model="task.done" color="primary" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ task.title }}</q-item-label>
+        </q-item-section>
+        <q-item-section>
+          <q-item-label class="text-right">{{ task.dueDate }}</q-item-label>
+        </q-item-section>
+        <q-item-section v-if="task.done" side>
+          <q-btn
+            @click.stop="deleteTask(index)"
+            push
+            color="primary"
+            icon="delete"
+            dense
+          />
+        </q-item-section>
+      </q-item>
+    </q-list>
+    <div class="no-tasks" v-if="!tasks.length">
+      <center>
+        <q-icon name="check" size="100px" color="primary" />
+        <div class="text-h5 text-primary">No Tasks Remaining</div>
+      </center>
+    </div>
+  </q-page>
 </template>
 
 <script>
@@ -69,6 +74,13 @@ export default defineComponent({
   methods: {
     deleteTask(index) {
       this.tasks.splice(index, 1);
+    },
+    addTask() {
+      this.tasks.push({
+        title: "title",
+        dueDate: "dueDate",
+        done: false,
+      });
     },
   },
 });

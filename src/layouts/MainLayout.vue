@@ -87,7 +87,7 @@
       </q-card-section>
       <q-card-actions align="right" class="text-primary">
         <q-btn flat label="Cancel" v-close-popup />
-        <q-btn flat label="Add Assignment" v-close-popup />
+        <q-btn flat label="Add Assignment" Extra.addTask  v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -138,6 +138,7 @@ export default defineComponent({
     },
   },
 });
+
 </script>
 
 <style lang="scss">
